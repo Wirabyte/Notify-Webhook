@@ -2,6 +2,13 @@
 
 A webhook management application for sending notifications to multiple platforms including Discord, LINE, and Telegram. This project consists of a NestJS backend API and an Angular frontend for managing webhooks and notifications.
 
+## Summary
+
+This is a complete webhook management solution featuring:
+- **Backend**: NestJS API with Swagger documentation and multi-platform notification support
+- **Frontend**: Angular 19 application using PrimeNG components with Tailwind CSS for custom styling
+- **Architecture**: The frontend leverages PrimeNG components as the main UI library, while Tailwind CSS is used for custom styling and layout adjustments rather than as the primary component framework
+
 ## Project Structure
 
 ```
@@ -50,8 +57,8 @@ The API will be available at `http://localhost:3000` with Swagger docs at `http:
 
 ### Features
 - Angular 19 (standalone components)
-- Tailwind CSS for styling
-- PrimeNG for UI components
+- PrimeNG components for main UI elements
+- Tailwind CSS for custom styling and layout adjustments
 - No SSR (single-page application)
 
 ### Getting Started
