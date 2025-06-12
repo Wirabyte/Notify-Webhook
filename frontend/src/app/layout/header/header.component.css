@@ -1,0 +1,27 @@
+/* Custom styles for header component */
+.p-menubar {
+  background: transparent !important;
+  border: none !important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content {
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.p-sidebar {
+  z-index: 1100;
+}
+
+.p-sidebar .p-sidebar-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.p-sidebar .p-sidebar-content {
+  padding: 1rem;
+}

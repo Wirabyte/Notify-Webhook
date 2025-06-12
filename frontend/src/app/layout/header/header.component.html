@@ -1,0 +1,80 @@
+<div class="bg-white shadow-md border-b border-gray-200">
+  <!-- Main Navigation Bar -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      <!-- Logo/Brand -->
+      <div class="flex items-center">
+        <button 
+          type="button" 
+          class="md:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
+          (click)="sidebarVisible = !sidebarVisible">
+          <i class="pi pi-bars text-xl"></i>
+        </button>
+        <h1 class="ml-2 text-xl font-bold text-gray-900">Webhook Manager</h1>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:block">
+        <p-menubar [model]="items" class="border-0 bg-transparent">
+          <ng-template pTemplate="start">
+            <span class="text-lg font-semibold text-gray-700">Navigate</span>
+          </ng-template>
+        </p-menubar>
+      </div>
+
+      <!-- User Menu/Actions -->
+      <div class="flex items-center space-x-4">
+        <p-button 
+          icon="pi pi-bell" 
+          severity="secondary" 
+          [text]="true"
+          [rounded]="true"
+          size="small">
+        </p-button>
+        <p-button 
+          icon="pi pi-user" 
+          severity="secondary" 
+          [text]="true"
+          [rounded]="true"
+          size="small">
+        </p-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Sidebar -->
+<p-sidebar 
+  [(visible)]="sidebarVisible" 
+  position="left"
+  [modal]="true"
+  [dismissible]="true"
+  class="w-80">
+  <ng-template pTemplate="header">
+    <div class="flex items-center">
+      <h2 class="text-lg font-semibold">Menu</h2>
+    </div>
+  </ng-template>
+  
+  <div class="space-y-2">
+    <div *ngFor="let item of items" class="block">
+      <a 
+        [routerLink]="item.routerLink || '#'"
+        class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+        (click)="sidebarVisible = false">
+        <i [class]="item.icon" class="mr-3"></i>
+        {{ item.label }}
+      </a>
+      <div *ngIf="item.items" class="ml-6 space-y-1">
+        <a 
+          *ngFor="let subItem of item.items"
+          [routerLink]="subItem.routerLink || '#'"
+          class="flex items-center px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-md transition-colors"
+          (click)="sidebarVisible = false">
+          <i [class]="subItem.icon" class="mr-3"></i>
+          {{ subItem.label }}
+        </a>
+      </div>
+    </div>
+  </div>
+</p-sidebar>
