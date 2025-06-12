@@ -19,10 +19,10 @@ export class WebhookDto {
   @ApiProperty({ description: 'Whether the webhook is active' })
   isActive: boolean;
 
-  @ApiProperty({ 
-    type: [String], 
+  @ApiProperty({
+    type: [String],
     enum: NotificationPlatform,
-    description: 'Platforms to send notifications to'
+    description: 'Platforms to send notifications to',
   })
   platforms: NotificationPlatform[];
 
@@ -43,10 +43,10 @@ export class CreateWebhookDto {
   @ApiProperty({ description: 'Description of the webhook', required: false })
   description?: string;
 
-  @ApiProperty({ 
-    type: [String], 
+  @ApiProperty({
+    type: [String],
     enum: NotificationPlatform,
-    description: 'Platforms to send notifications to'
+    description: 'Platforms to send notifications to',
   })
   platforms: NotificationPlatform[];
 
@@ -61,17 +61,23 @@ export class UpdateWebhookDto {
   @ApiProperty({ description: 'Description of the webhook', required: false })
   description?: string;
 
-  @ApiProperty({ description: 'Whether the webhook is active', required: false })
+  @ApiProperty({
+    description: 'Whether the webhook is active',
+    required: false,
+  })
   isActive?: boolean;
 
-  @ApiProperty({ 
-    type: [String], 
+  @ApiProperty({
+    type: [String],
     enum: NotificationPlatform,
     description: 'Platforms to send notifications to',
-    required: false
+    required: false,
   })
   platforms?: NotificationPlatform[];
 
-  @ApiProperty({ description: 'Configuration for each platform', required: false })
+  @ApiProperty({
+    description: 'Configuration for each platform',
+    required: false,
+  })
   platformConfigs?: { [key in NotificationPlatform]?: any };
 }
