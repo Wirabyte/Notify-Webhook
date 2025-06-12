@@ -20,7 +20,7 @@ export class NotificationsService {
       sendNotificationDto;
 
     try {
-      const webhook = this.webhooksService.findOne(webhookId);
+      const webhook = await this.webhooksService.findOne(webhookId);
 
       if (!webhook.isActive) {
         return {
@@ -43,7 +43,7 @@ export class NotificationsService {
             config: webhook.platformConfigs[platform],
           });
           platformResults[platform] = result;
-        } catch (error) {
+        } catch (error: any) {
           platformResults[platform] = {
             success: false,
             error: error.message,
@@ -56,7 +56,7 @@ export class NotificationsService {
         message: 'Notification sent successfully',
         platformResults,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
         message: error.message,

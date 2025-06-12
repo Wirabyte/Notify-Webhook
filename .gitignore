@@ -4,6 +4,12 @@ backend/dist
 */node_modules
 /build
 
+# Database files
+backend/database.sqlite
+*.db
+*.sqlite
+*.sqlite3
+
 # Logs
 logs
 *.log

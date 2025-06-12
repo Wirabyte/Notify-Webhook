@@ -1,60 +1,53 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Webhook } from './entities/webhook.entity';
 import { CreateWebhookDto, UpdateWebhookDto } from './dto/webhook.dto';
-import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class WebhooksService {
-  private webhooks: Webhook[] = [];
+  constructor(
+    @InjectRepository(Webhook)
+    private webhookRepository: Repository<Webhook>,
+  ) {}
 
-  create(createWebhookDto: CreateWebhookDto): Webhook {
-    const webhook = new Webhook({
-      id: uuidv4(),
+  async create(createWebhookDto: CreateWebhookDto): Promise<Webhook> {
+    const webhook = this.webhookRepository.create({
       ...createWebhookDto,
+      isActive: true,
     });
 
-    this.webhooks.push(webhook);
-    return webhook;
+    return await this.webhookRepository.save(webhook);
   }
 
-  findAll(): Webhook[] {
-    return this.webhooks;
+  async findAll(): Promise<Webhook[]> {
+    return await this.webhookRepository.find();
   }
 
-  findOne(id: string): Webhook {
-    const webhook = this.webhooks.find((w) => w.id === id);
+  async findOne(id: string): Promise<Webhook> {
+    const webhook = await this.webhookRepository.findOne({ where: { id } });
     if (!webhook) {
       throw new NotFoundException(`Webhook with ID ${id} not found`);
     }
     return webhook;
   }
 
-  update(id: string, updateWebhookDto: UpdateWebhookDto): Webhook {
-    const webhookIndex = this.webhooks.findIndex((w) => w.id === id);
-    if (webhookIndex === -1) {
-      throw new NotFoundException(`Webhook with ID ${id} not found`);
-    }
-
-    const webhook = this.webhooks[webhookIndex];
+  async update(id: string, updateWebhookDto: UpdateWebhookDto): Promise<Webhook> {
+    const webhook = await this.findOne(id);
     Object.assign(webhook, updateWebhookDto);
-    webhook.updatedAt = new Date();
-
-    this.webhooks[webhookIndex] = webhook;
-    return webhook;
+    return await this.webhookRepository.save(webhook);
   }
 
-  remove(id: string): void {
-    const webhookIndex = this.webhooks.findIndex((w) => w.id === id);
-    if (webhookIndex === -1) {
+  async remove(id: string): Promise<void> {
+    const result = await this.webhookRepository.delete(id);
+    if (result.affected === 0) {
       throw new NotFoundException(`Webhook with ID ${id} not found`);
     }
-
-    this.webhooks.splice(webhookIndex, 1);
   }
 
   // Method to trigger a webhook
-  trigger(id: string, payload: any): { success: boolean; message: string } {
-    const webhook = this.findOne(id);
+  async trigger(id: string, payload: any): Promise<{ success: boolean; message: string }> {
+    const webhook = await this.findOne(id);
 
     if (!webhook.isActive) {
       return { success: false, message: 'Webhook is not active' };

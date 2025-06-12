@@ -22,16 +22,25 @@ This is a complete webhook management solution featuring:
 - **Webhook Management**: Create, update, delete, and manage webhooks
 - **Multi-Platform Support**: Send notifications to Discord, LINE, and Telegram
 - **Permission Management**: Configure which platforms each webhook can notify
-- **API Documentation**: Swagger/OpenAPI documentation for the backend API
+- **API Documentation**: Comprehensive Swagger/OpenAPI documentation
+- **Database Persistence**: SQLite database with TypeORM for data storage
 - **Modern UI**: Angular 19 frontend with Tailwind CSS and PrimeNG components
 
 ## Backend (NestJS)
 
 ### Features
 - RESTful API for webhook management
-- Swagger documentation at `/api`
-- Support for multiple notification platforms
+- Enhanced Swagger documentation at `/api`
+- SQLite database with TypeORM for data persistence
+- Support for multiple notification platforms (Discord, LINE, Telegram)
 - CORS enabled for frontend communication
+- Comprehensive error handling and validation
+
+### Database
+- **Technology**: SQLite with TypeORM
+- **File**: `backend/database.sqlite` (created automatically)
+- **Schema**: See [Database Schema Documentation](docs/database-schema.md)
+- **Synchronization**: Auto-sync enabled for development
 
 ### Getting Started
 
@@ -42,6 +51,11 @@ npm run start:dev
 ```
 
 The API will be available at `http://localhost:3000` with Swagger docs at `http://localhost:3000/api`.
+
+### Documentation
+- **API Documentation**: [Complete API Guide](docs/api-documentation.md)
+- **Database Schema**: [Database Schema & ERD](docs/database-schema.md)
+- **Swagger UI**: Available at `/api` when server is running
 
 ### API Endpoints
 
