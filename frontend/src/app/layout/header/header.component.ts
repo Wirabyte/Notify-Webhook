@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MenubarModule } from 'primeng/menubar';
@@ -13,7 +13,7 @@ import { MenuItem } from 'primeng/api';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   items: MenuItem[] = [];
   sidebarVisible = false;
 
