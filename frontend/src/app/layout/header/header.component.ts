@@ -1,15 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { MenubarModule } from 'primeng/menubar';
-import { ButtonModule } from 'primeng/button';
-import { SidebarModule } from 'primeng/sidebar';
 import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
-  imports: [CommonModule, RouterModule, MenubarModule, ButtonModule, SidebarModule],
+  standalone: false,
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
