@@ -7,27 +7,27 @@ export enum NotificationPlatform {
 }
 
 export class WebhookDto {
-  @ApiProperty({ 
+  @ApiProperty({
     description: 'Unique identifier for the webhook',
-    example: 'cd410407-640b-4a8d-9dee-b89b88e31659'
+    example: 'cd410407-640b-4a8d-9dee-b89b88e31659',
   })
   id?: string;
 
-  @ApiProperty({ 
+  @ApiProperty({
     description: 'Name of the webhook',
-    example: 'Discord Server Alerts'
+    example: 'Discord Server Alerts',
   })
   name: string;
 
-  @ApiProperty({ 
+  @ApiProperty({
     description: 'Description of the webhook',
-    example: 'Sends critical alerts to Discord server'
+    example: 'Sends critical alerts to Discord server',
   })
   description?: string;
 
-  @ApiProperty({ 
+  @ApiProperty({
     description: 'Whether the webhook is active',
-    example: true
+    example: true,
   })
   isActive: boolean;
 
@@ -35,44 +35,44 @@ export class WebhookDto {
     type: [String],
     enum: NotificationPlatform,
     description: 'Platforms to send notifications to',
-    example: ['discord', 'telegram']
+    example: ['discord', 'telegram'],
   })
   platforms: NotificationPlatform[];
 
-  @ApiProperty({ 
+  @ApiProperty({
     description: 'Configuration for each platform',
     example: {
       discord: {
-        webhookUrl: 'https://discord.com/api/webhooks/123456789/abcdef'
-      }
-    }
+        webhookUrl: 'https://discord.com/api/webhooks/123456789/abcdef',
+      },
+    },
   })
   platformConfigs: { [key in NotificationPlatform]?: any };
 
-  @ApiProperty({ 
+  @ApiProperty({
     description: 'Creation timestamp',
-    example: '2025-01-01T00:00:00.000Z'
+    example: '2025-01-01T00:00:00.000Z',
   })
   createdAt?: Date;
 
-  @ApiProperty({ 
+  @ApiProperty({
     description: 'Last updated timestamp',
-    example: '2025-01-01T00:00:00.000Z'
+    example: '2025-01-01T00:00:00.000Z',
   })
   updatedAt?: Date;
 }
 
 export class CreateWebhookDto {
-  @ApiProperty({ 
+  @ApiProperty({
     description: 'Name of the webhook',
-    example: 'Discord Server Alerts'
+    example: 'Discord Server Alerts',
   })
   name: string;
 
-  @ApiProperty({ 
-    description: 'Description of the webhook', 
+  @ApiProperty({
+    description: 'Description of the webhook',
     required: false,
-    example: 'Sends critical alerts to Discord server'
+    example: 'Sends critical alerts to Discord server',
   })
   description?: string;
 
@@ -80,21 +80,21 @@ export class CreateWebhookDto {
     type: [String],
     enum: NotificationPlatform,
     description: 'Platforms to send notifications to',
-    example: ['discord', 'telegram']
+    example: ['discord', 'telegram'],
   })
   platforms: NotificationPlatform[];
 
-  @ApiProperty({ 
+  @ApiProperty({
     description: 'Configuration for each platform',
     example: {
       discord: {
-        webhookUrl: 'https://discord.com/api/webhooks/123456789/abcdef'
+        webhookUrl: 'https://discord.com/api/webhooks/123456789/abcdef',
       },
       telegram: {
         botToken: 'bot123456789:abcdef',
-        chatId: '-123456789'
-      }
-    }
+        chatId: '-123456789',
+      },
+    },
   })
   platformConfigs: { [key in NotificationPlatform]?: any };
 }

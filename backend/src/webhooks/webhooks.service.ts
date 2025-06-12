@@ -32,7 +32,10 @@ export class WebhooksService {
     return webhook;
   }
 
-  async update(id: string, updateWebhookDto: UpdateWebhookDto): Promise<Webhook> {
+  async update(
+    id: string,
+    updateWebhookDto: UpdateWebhookDto,
+  ): Promise<Webhook> {
     const webhook = await this.findOne(id);
     Object.assign(webhook, updateWebhookDto);
     return await this.webhookRepository.save(webhook);
@@ -46,7 +49,10 @@ export class WebhooksService {
   }
 
   // Method to trigger a webhook
-  async trigger(id: string, payload: any): Promise<{ success: boolean; message: string }> {
+  async trigger(
+    id: string,
+    payload: any,
+  ): Promise<{ success: boolean; message: string }> {
     const webhook = await this.findOne(id);
 
     if (!webhook.isActive) {
