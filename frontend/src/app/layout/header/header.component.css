@@ -1,4 +1,9 @@
 /* Custom styles for header component */
+.p-toolbar {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid var(--surface-border);
+}
+
 .p-menubar {
   background: transparent !important;
   border: none !important;
@@ -10,7 +15,8 @@
 }
 
 .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content:hover {
-  background: rgba(59, 130, 246, 0.1);
+  background: var(--primary-color-text);
+  opacity: 0.1;
 }
 
 .p-sidebar {
@@ -19,7 +25,7 @@
 
 .p-sidebar .p-sidebar-header {
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--surface-border);
 }
 
 .p-sidebar .p-sidebar-content {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -10,8 +10,10 @@ import { MenuItem } from 'primeng/api';
 export class HeaderComponent implements OnInit {
   items: MenuItem[] = [];
   sidebarVisible = false;
+  isMobile = false;
 
   ngOnInit() {
+    this.checkScreenSize();
     this.items = [
       {
         label: 'Home',
@@ -51,5 +53,14 @@ export class HeaderComponent implements OnInit {
         ]
       }
     ];
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenSize();
+  }
+
+  private checkScreenSize() {
+    this.isMobile = window.innerWidth < 768;
   }
 }
