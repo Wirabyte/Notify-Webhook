@@ -1,21 +1,7 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  HttpCode,
-  HttpStatus,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { WebhooksService } from './webhooks.service';
-import {
-  CreateWebhookDto,
-  UpdateWebhookDto,
-  WebhookDto,
-} from './dto/webhook.dto';
+import { CreateWebhookDto, UpdateWebhookDto, WebhookDto } from './dto/webhook.dto';
 
 @ApiTags('webhooks')
 @Controller('webhooks')

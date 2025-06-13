@@ -2,13 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import type {
-  AppConfig,
-  CorsConfig,
-  ApiDocsConfig,
-  ContactConfig,
-  DatabaseConfig,
-} from './config/config.types';
+import type { AppConfig, CorsConfig, ApiDocsConfig, ContactConfig, DatabaseConfig } from './config/config.types';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -30,9 +24,7 @@ async function bootstrap() {
   // Conditionally enable Swagger API documentation
   // API docs are enabled for development and staging, disabled for production
   if (apiDocsConfig.enabled) {
-    console.log(
-      `🔍 API Documentation enabled for environment: ${appConfig.environment}`,
-    );
+    console.log(`🔍 API Documentation enabled for environment: ${appConfig.environment}`);
 
     const config = new DocumentBuilder()
       .setTitle(appConfig.name)
@@ -64,10 +56,7 @@ This API uses SQLite with TypeORM for data persistence. All webhook configuratio
       .addTag('notifications', 'Notification sending endpoints')
       .setContact(contactConfig.name, contactConfig.url, contactConfig.email)
       .setLicense('MIT', 'https://opensource.org/licenses/MIT')
-      .addServer(
-        `http://localhost:${appConfig.port}`,
-        `${appConfig.environment} server`,
-      )
+      .addServer(`http://localhost:${appConfig.port}`, `${appConfig.environment} server`)
       .build();
 
     const document = SwaggerModule.createDocument(app, config);
@@ -89,19 +78,13 @@ This API uses SQLite with TypeORM for data persistence. All webhook configuratio
       },
     });
 
-    console.log(
-      `📖 Swagger documentation available at: http://localhost:${appConfig.port}/${apiDocsConfig.path}`,
-    );
+    console.log(`📖 Swagger documentation available at: http://localhost:${appConfig.port}/${apiDocsConfig.path}`);
   } else {
-    console.log(
-      `🔒 API Documentation disabled for environment: ${appConfig.environment}`,
-    );
+    console.log(`🔒 API Documentation disabled for environment: ${appConfig.environment}`);
   }
 
   await app.listen(appConfig.port);
-  console.log(
-    `🚀 Application is running on: http://localhost:${appConfig.port}`,
-  );
+  console.log(`🚀 Application is running on: http://localhost:${appConfig.port}`);
   console.log(`🌍 Environment: ${appConfig.environment}`);
   console.log(`🗄️  Database: ${databaseConfig.database}`);
 }

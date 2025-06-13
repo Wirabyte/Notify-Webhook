@@ -21,9 +21,7 @@
     <div class="hidden md:block">
       <p-menubar [model]="items" styleClass="border-none bg-transparent">
         <ng-template pTemplate="start">
-          <span class="text-lg font-semibold text-color-secondary"
-            >Navigate</span
-          >
+          <span class="text-lg font-semibold text-color-secondary">Navigate</span>
         </ng-template>
       </p-menubar>
     </div>
@@ -32,34 +30,14 @@
   <ng-template pTemplate="end">
     <!-- User Menu/Actions -->
     <div class="flex align-items-center gap-2">
-      <p-button
-        icon="pi pi-bell"
-        severity="secondary"
-        [text]="true"
-        [rounded]="true"
-        size="small"
-      >
-      </p-button>
-      <p-button
-        icon="pi pi-user"
-        severity="secondary"
-        [text]="true"
-        [rounded]="true"
-        size="small"
-      >
-      </p-button>
+      <p-button icon="pi pi-bell" severity="secondary" [text]="true" [rounded]="true" size="small"> </p-button>
+      <p-button icon="pi pi-user" severity="secondary" [text]="true" [rounded]="true" size="small"> </p-button>
     </div>
   </ng-template>
 </p-toolbar>
 
 <!-- Mobile Sidebar -->
-<p-sidebar
-  [(visible)]="sidebarVisible"
-  position="left"
-  [modal]="true"
-  [dismissible]="true"
-  styleClass="w-20rem"
->
+<p-sidebar [(visible)]="sidebarVisible" position="left" [modal]="true" [dismissible]="true" styleClass="w-20rem">
   <ng-template pTemplate="header">
     <div class="flex align-items-center">
       <h2 class="text-lg font-semibold">Menu</h2>
