@@ -7,26 +7,15 @@ import {
   shouldSynchronizeDb,
   shouldEnableDbLogging,
 } from './env.constants';
-import type {
-  DatabaseConfig,
-  AppConfig,
-  ApiDocsConfig,
-  CorsConfig,
-  ContactConfig,
-} from './config.types';
+import type { DatabaseConfig, AppConfig, ApiDocsConfig, CorsConfig, ContactConfig } from './config.types';
 
 export const databaseConfig = registerAs('database', (): DatabaseConfig => {
   const nodeEnv = process.env[ENV_KEYS.NODE_ENV] || DEFAULT_VALUES.NODE_ENV;
 
   return {
-    type: (process.env[ENV_KEYS.DB_TYPE] || DEFAULT_VALUES.DB_TYPE) as
-      | 'sqlite'
-      | 'postgres'
-      | 'mysql',
+    type: (process.env[ENV_KEYS.DB_TYPE] || DEFAULT_VALUES.DB_TYPE) as 'sqlite' | 'postgres' | 'mysql',
     host: process.env[ENV_KEYS.DB_HOST],
-    port: process.env[ENV_KEYS.DB_PORT]
-      ? parseInt(process.env[ENV_KEYS.DB_PORT]!, 10)
-      : undefined,
+    port: process.env[ENV_KEYS.DB_PORT] ? parseInt(process.env[ENV_KEYS.DB_PORT]!, 10) : undefined,
     username: process.env[ENV_KEYS.DB_USERNAME],
     password: process.env[ENV_KEYS.DB_PASSWORD],
     database: process.env[ENV_KEYS.DB_DATABASE] || DEFAULT_VALUES.DB_DATABASE,
@@ -43,17 +32,14 @@ export const appConfig = registerAs('app', (): AppConfig => {
   const nodeEnv = process.env[ENV_KEYS.NODE_ENV] || DEFAULT_VALUES.NODE_ENV;
 
   return {
-    port: process.env[ENV_KEYS.PORT]
-      ? parseInt(process.env[ENV_KEYS.PORT]!, 10)
-      : DEFAULT_VALUES.PORT,
+    port: process.env[ENV_KEYS.PORT] ? parseInt(process.env[ENV_KEYS.PORT]!, 10) : DEFAULT_VALUES.PORT,
     environment: nodeEnv,
     isDevelopment: nodeEnv === ENVIRONMENT.DEVELOPMENT,
     isStaging: nodeEnv === ENVIRONMENT.STAGING,
     isProduction: nodeEnv === ENVIRONMENT.PRODUCTION,
     name: process.env[ENV_KEYS.APP_NAME] || DEFAULT_VALUES.APP_NAME,
     version: process.env[ENV_KEYS.APP_VERSION] || DEFAULT_VALUES.APP_VERSION,
-    description:
-      process.env[ENV_KEYS.APP_DESCRIPTION] || DEFAULT_VALUES.APP_DESCRIPTION,
+    description: process.env[ENV_KEYS.APP_DESCRIPTION] || DEFAULT_VALUES.APP_DESCRIPTION,
   };
 });
 
@@ -69,9 +55,8 @@ export const apiDocsConfig = registerAs('apiDocs', (): ApiDocsConfig => {
 });
 
 export const corsConfig = registerAs('cors', (): CorsConfig => {
-  const originsEnv =
-    process.env[ENV_KEYS.CORS_ORIGINS] || DEFAULT_VALUES.CORS_ORIGINS;
-  const origins = originsEnv.split(',').map((origin) => origin.trim());
+  const originsEnv = process.env[ENV_KEYS.CORS_ORIGINS] || DEFAULT_VALUES.CORS_ORIGINS;
+  const origins = originsEnv.split(',').map(origin => origin.trim());
 
   return {
     origins,

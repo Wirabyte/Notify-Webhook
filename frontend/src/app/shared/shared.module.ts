@@ -9,21 +9,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    MenubarModule,
-    ButtonModule,
-    SidebarModule,
-    ToolbarModule
-  ],
-  exports: [
-    CommonModule,
-    RouterModule,
-    MenubarModule,
-    ButtonModule,
-    SidebarModule,
-    ToolbarModule
-  ]
+  imports: [CommonModule, RouterModule, MenubarModule, ButtonModule, SidebarModule, ToolbarModule],
+  exports: [CommonModule, RouterModule, MenubarModule, ButtonModule, SidebarModule, ToolbarModule],
 })
-export class SharedModule { }
+export class SharedModule {}

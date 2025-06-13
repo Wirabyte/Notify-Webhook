@@ -59,8 +59,7 @@ export const DEFAULT_VALUES = {
   CORS_CREDENTIALS: true,
   APP_NAME: 'Webhook Notification API',
   APP_VERSION: '1.0.0',
-  APP_DESCRIPTION:
-    'API for managing webhooks and notifications to multiple platforms',
+  APP_DESCRIPTION: 'API for managing webhooks and notifications to multiple platforms',
   CONTACT_NAME: 'API Support',
   CONTACT_URL: 'https://github.com/Thanaphol47825/Notify-Webhook',
   CONTACT_EMAIL: 'support@example.com',

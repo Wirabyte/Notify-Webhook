@@ -24,8 +24,7 @@ export class SendNotificationDto {
   @ApiProperty({
     enum: NotificationPlatform,
     isArray: true,
-    description:
-      'Specific platforms to send to (optional, will use webhook config if not provided)',
+    description: 'Specific platforms to send to (optional, will use webhook config if not provided)',
     required: false,
     example: ['discord'],
   })
