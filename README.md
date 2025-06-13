@@ -97,6 +97,46 @@ npm run build
 - Node.js 18+ 
 - npm
 
+### Code Quality
+
+Both backend and frontend are equipped with ESLint and Prettier for code quality and formatting:
+
+#### Running Linting
+```bash
+# Lint all projects
+npm run lint:all
+
+# Lint backend only
+npm run lint:backend
+
+# Lint frontend only  
+npm run lint:frontend
+```
+
+#### Running Formatting
+```bash
+# Format all projects
+npm run format:all
+
+# Format backend only
+npm run format:backend
+
+# Format frontend only
+npm run format:frontend
+```
+
+#### Configuration
+- **Backend**: ESLint with TypeScript rules, Prettier for formatting
+- **Frontend**: ESLint with Angular-specific rules, Prettier for formatting
+- **Shared Config**: Consistent Prettier settings across both projects
+
+### Installation and Setup
+
+Install dependencies for all projects:
+```bash
+npm run install:all
+```
+
 ### Running Both Applications
 
 1. Start the backend:
@@ -111,6 +151,12 @@ npm run start:dev
 cd frontend
 npm install
 npm run start
+```
+
+Alternatively, start both applications concurrently from the root:
+```bash
+npm run install:all
+npm start
 ```
 
 ## Platform Configuration
