@@ -3,7 +3,7 @@
     <!-- Mobile Menu Toggle and Logo -->
     <div class="flex align-items-center">
       <p-button 
-        *ngIf="isMobile"
+        class="md:hidden"
         icon="pi pi-bars" 
         severity="secondary" 
         [text]="true"
@@ -17,7 +17,7 @@
 
   <ng-template pTemplate="center">
     <!-- Desktop Navigation -->
-    <div *ngIf="!isMobile">
+    <div class="hidden md:block">
       <p-menubar [model]="items" styleClass="border-none bg-transparent">
         <ng-template pTemplate="start">
           <span class="text-lg font-semibold text-color-secondary">Navigate</span>
