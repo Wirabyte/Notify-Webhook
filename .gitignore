@@ -25,6 +25,7 @@ lerna-debug.log*
 # Tests
 /coverage
 /.nyc_output
+backend/coverage
 
 # IDEs and editors
 /.idea
