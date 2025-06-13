@@ -3,6 +3,20 @@ import { WebhooksService } from '../webhooks/webhooks.service';
 import { SendNotificationDto, NotificationResponseDto } from './dto/notification.dto';
 import { NotificationPlatform } from '../webhooks/dto/webhook.dto';
 
+interface PlatformData {
+  message: string;
+  title?: string;
+  metadata?: Record<string, unknown>;
+  config?: Record<string, unknown>;
+}
+
+interface PlatformResult {
+  success: boolean;
+  platform?: string;
+  timestamp?: Date;
+  error?: string;
+}
+
 @Injectable()
 export class NotificationsService {
   constructor(
@@ -11,7 +25,8 @@ export class NotificationsService {
   ) {}
 
   async sendNotification(sendNotificationDto: SendNotificationDto): Promise<NotificationResponseDto> {
-    const { webhookId, message, title, platforms, metadata } = sendNotificationDto;
+    const { webhookId, message, title, platforms } = sendNotificationDto;
+    const metadata = sendNotificationDto.metadata as Record<string, unknown> | undefined;
 
     try {
       const webhook = await this.webhooksService.findOne(webhookId);
@@ -25,7 +40,7 @@ export class NotificationsService {
 
       // Use specified platforms or fallback to webhook platforms
       const targetPlatforms = platforms || webhook.platforms;
-      const platformResults: { [key in NotificationPlatform]?: any } = {};
+      const platformResults: { [key in NotificationPlatform]?: PlatformResult } = {};
 
       // Send to each platform
       for (const platform of targetPlatforms) {
@@ -33,14 +48,14 @@ export class NotificationsService {
           const result = await this.sendToPlatform(platform, {
             message,
             title,
-            metadata,
-            config: webhook.platformConfigs[platform],
+            metadata: metadata || {},
+            config: (webhook.platformConfigs[platform] as Record<string, unknown>) || {},
           });
           platformResults[platform] = result;
-        } catch (error: any) {
+        } catch (error: unknown) {
           platformResults[platform] = {
             success: false,
-            error: error.message,
+            error: error instanceof Error ? error.message : 'Unknown error occurred',
           };
         }
       }
@@ -50,15 +65,15 @@ export class NotificationsService {
         message: 'Notification sent successfully',
         platformResults,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       return {
         success: false,
-        message: error.message,
+        message: error instanceof Error ? error.message : 'Unknown error occurred',
       };
     }
   }
 
-  private async sendToPlatform(platform: NotificationPlatform, data: any): Promise<any> {
+  private async sendToPlatform(platform: NotificationPlatform, data: PlatformData): Promise<PlatformResult> {
     // This is where you would implement the actual platform-specific logic
     console.log(`Sending to ${platform}:`, data);
 
@@ -70,25 +85,25 @@ export class NotificationsService {
       case NotificationPlatform.TELEGRAM:
         return await this.sendToTelegram(data);
       default:
-        throw new Error(`Unsupported platform: ${platform}`);
+        throw new Error(`Unsupported platform: ${platform as string}`);
     }
   }
 
-  private async sendToDiscord(data: any): Promise<any> {
+  private async sendToDiscord(data: PlatformData): Promise<PlatformResult> {
     // Implement Discord webhook logic here
     console.log('Sending to Discord:', data);
-    return { success: true, platform: 'discord', timestamp: new Date() };
+    return Promise.resolve({ success: true, platform: 'discord', timestamp: new Date() });
   }
 
-  private async sendToLine(data: any): Promise<any> {
+  private async sendToLine(data: PlatformData): Promise<PlatformResult> {
     // Implement LINE notification logic here
     console.log('Sending to LINE:', data);
-    return { success: true, platform: 'line', timestamp: new Date() };
+    return Promise.resolve({ success: true, platform: 'line', timestamp: new Date() });
   }
 
-  private async sendToTelegram(data: any): Promise<any> {
+  private async sendToTelegram(data: PlatformData): Promise<PlatformResult> {
     // Implement Telegram bot logic here
     console.log('Sending to Telegram:', data);
-    return { success: true, platform: 'telegram', timestamp: new Date() };
+    return Promise.resolve({ success: true, platform: 'telegram', timestamp: new Date() });
   }
 }
