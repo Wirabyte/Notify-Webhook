@@ -1,6 +1,9 @@
 import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { WebhooksService } from '../webhooks/webhooks.service';
-import { SendNotificationDto, NotificationResponseDto } from './dto/notification.dto';
+import {
+  SendNotificationDto,
+  NotificationResponseDto,
+} from './dto/notification.dto';
 import { NotificationPlatform } from '../webhooks/dto/webhook.dto';
 
 @Injectable()
@@ -10,12 +13,15 @@ export class NotificationsService {
     private readonly webhooksService: WebhooksService,
   ) {}
 
-  async sendNotification(sendNotificationDto: SendNotificationDto): Promise<NotificationResponseDto> {
-    const { webhookId, message, title, platforms, metadata } = sendNotificationDto;
-    
+  async sendNotification(
+    sendNotificationDto: SendNotificationDto,
+  ): Promise<NotificationResponseDto> {
+    const { webhookId, message, title, platforms, metadata } =
+      sendNotificationDto;
+
     try {
-      const webhook = this.webhooksService.findOne(webhookId);
-      
+      const webhook = await this.webhooksService.findOne(webhookId);
+
       if (!webhook.isActive) {
         return {
           success: false,
@@ -37,7 +43,7 @@ export class NotificationsService {
             config: webhook.platformConfigs[platform],
           });
           platformResults[platform] = result;
-        } catch (error) {
+        } catch (error: any) {
           platformResults[platform] = {
             success: false,
             error: error.message,
@@ -50,7 +56,7 @@ export class NotificationsService {
         message: 'Notification sent successfully',
         platformResults,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
         message: error.message,
@@ -58,7 +64,10 @@ export class NotificationsService {
     }
   }
 
-  private async sendToPlatform(platform: NotificationPlatform, data: any): Promise<any> {
+  private async sendToPlatform(
+    platform: NotificationPlatform,
+    data: any,
+  ): Promise<any> {
     // This is where you would implement the actual platform-specific logic
     console.log(`Sending to ${platform}:`, data);
 

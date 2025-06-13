@@ -4,6 +4,12 @@ backend/dist
 */node_modules
 /build
 
+# Database files
+backend/database.sqlite
+*.db
+*.sqlite
+*.sqlite3
+
 # Logs
 logs
 *.log
@@ -42,6 +48,9 @@ lerna-debug.log*
 .env.test.local
 .env.production.local
 .env.local
+
+# Keep environment templates
+!.env.example
 
 # temp directory
 .temp

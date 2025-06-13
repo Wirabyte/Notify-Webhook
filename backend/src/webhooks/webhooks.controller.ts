@@ -1,17 +1,21 @@
-import { 
-  Controller, 
-  Get, 
-  Post, 
-  Body, 
-  Patch, 
-  Param, 
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
   Delete,
   HttpCode,
-  HttpStatus 
+  HttpStatus,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { WebhooksService } from './webhooks.service';
-import { CreateWebhookDto, UpdateWebhookDto, WebhookDto } from './dto/webhook.dto';
+import {
+  CreateWebhookDto,
+  UpdateWebhookDto,
+  WebhookDto,
+} from './dto/webhook.dto';
 
 @ApiTags('webhooks')
 @Controller('webhooks')
@@ -20,14 +24,22 @@ export class WebhooksController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new webhook' })
-  @ApiResponse({ status: 201, description: 'Webhook created successfully', type: WebhookDto })
+  @ApiResponse({
+    status: 201,
+    description: 'Webhook created successfully',
+    type: WebhookDto,
+  })
   create(@Body() createWebhookDto: CreateWebhookDto) {
     return this.webhooksService.create(createWebhookDto);
   }
 
   @Get()
   @ApiOperation({ summary: 'Get all webhooks' })
-  @ApiResponse({ status: 200, description: 'List of all webhooks', type: [WebhookDto] })
+  @ApiResponse({
+    status: 200,
+    description: 'List of all webhooks',
+    type: [WebhookDto],
+  })
   findAll() {
     return this.webhooksService.findAll();
   }
@@ -44,7 +56,11 @@ export class WebhooksController {
   @Patch(':id')
   @ApiOperation({ summary: 'Update a webhook' })
   @ApiParam({ name: 'id', description: 'Webhook ID' })
-  @ApiResponse({ status: 200, description: 'Webhook updated successfully', type: WebhookDto })
+  @ApiResponse({
+    status: 200,
+    description: 'Webhook updated successfully',
+    type: WebhookDto,
+  })
   @ApiResponse({ status: 404, description: 'Webhook not found' })
   update(@Param('id') id: string, @Body() updateWebhookDto: UpdateWebhookDto) {
     return this.webhooksService.update(id, updateWebhookDto);
