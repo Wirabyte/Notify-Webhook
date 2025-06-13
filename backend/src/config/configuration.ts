@@ -7,7 +7,13 @@ import {
   shouldSynchronizeDb,
   shouldEnableDbLogging,
 } from './env.constants';
-import type { DatabaseConfig, AppConfig, ApiDocsConfig, CorsConfig, ContactConfig } from './config.types';
+import type {
+  DatabaseConfig,
+  AppConfig,
+  ApiDocsConfig,
+  CorsConfig,
+  ContactConfig,
+} from './config.types';
 
 export const databaseConfig = registerAs('database', (): DatabaseConfig => {
   const nodeEnv = process.env[ENV_KEYS.NODE_ENV] || DEFAULT_VALUES.NODE_ENV;
@@ -75,8 +81,11 @@ export const corsConfig = registerAs('cors', (): CorsConfig => {
   };
 });
 
-export const contactConfig = registerAs('contact', (): ContactConfig => ({
-  name: process.env[ENV_KEYS.CONTACT_NAME] || DEFAULT_VALUES.CONTACT_NAME,
-  url: process.env[ENV_KEYS.CONTACT_URL] || DEFAULT_VALUES.CONTACT_URL,
-  email: process.env[ENV_KEYS.CONTACT_EMAIL] || DEFAULT_VALUES.CONTACT_EMAIL,
-}));
+export const contactConfig = registerAs(
+  'contact',
+  (): ContactConfig => ({
+    name: process.env[ENV_KEYS.CONTACT_NAME] || DEFAULT_VALUES.CONTACT_NAME,
+    url: process.env[ENV_KEYS.CONTACT_URL] || DEFAULT_VALUES.CONTACT_URL,
+    email: process.env[ENV_KEYS.CONTACT_EMAIL] || DEFAULT_VALUES.CONTACT_EMAIL,
+  }),
+);
