@@ -2,14 +2,15 @@
   <ng-template pTemplate="start">
     <!-- Mobile Menu Toggle and Logo -->
     <div class="flex align-items-center">
-      <p-button 
+      <p-button
         class="md:hidden"
-        icon="pi pi-bars" 
-        severity="secondary" 
+        icon="pi pi-bars"
+        severity="secondary"
         [text]="true"
         [rounded]="true"
         size="small"
-        (click)="sidebarVisible = !sidebarVisible">
+        (click)="sidebarVisible = !sidebarVisible"
+      >
       </p-button>
       <span class="text-xl font-bold text-color ml-2">Webhook Manager</span>
     </div>
@@ -20,7 +21,9 @@
     <div class="hidden md:block">
       <p-menubar [model]="items" styleClass="border-none bg-transparent">
         <ng-template pTemplate="start">
-          <span class="text-lg font-semibold text-color-secondary">Navigate</span>
+          <span class="text-lg font-semibold text-color-secondary"
+            >Navigate</span
+          >
         </ng-template>
       </p-menubar>
     </div>
@@ -29,52 +32,57 @@
   <ng-template pTemplate="end">
     <!-- User Menu/Actions -->
     <div class="flex align-items-center gap-2">
-      <p-button 
-        icon="pi pi-bell" 
-        severity="secondary" 
+      <p-button
+        icon="pi pi-bell"
+        severity="secondary"
         [text]="true"
         [rounded]="true"
-        size="small">
+        size="small"
+      >
       </p-button>
-      <p-button 
-        icon="pi pi-user" 
-        severity="secondary" 
+      <p-button
+        icon="pi pi-user"
+        severity="secondary"
         [text]="true"
         [rounded]="true"
-        size="small">
+        size="small"
+      >
       </p-button>
     </div>
   </ng-template>
 </p-toolbar>
 
 <!-- Mobile Sidebar -->
-<p-sidebar 
-  [(visible)]="sidebarVisible" 
+<p-sidebar
+  [(visible)]="sidebarVisible"
   position="left"
   [modal]="true"
   [dismissible]="true"
-  styleClass="w-20rem">
+  styleClass="w-20rem"
+>
   <ng-template pTemplate="header">
     <div class="flex align-items-center">
       <h2 class="text-lg font-semibold">Menu</h2>
     </div>
   </ng-template>
-  
+
   <div class="flex flex-column gap-2">
     <div *ngFor="let item of items" class="block">
-      <a 
+      <a
         [routerLink]="item.routerLink || '#'"
         class="flex align-items-center p-3 text-color hover:surface-hover border-round transition-colors"
-        (click)="sidebarVisible = false">
+        (click)="sidebarVisible = false"
+      >
         <i [class]="item.icon" class="mr-3"></i>
         {{ item.label }}
       </a>
       <div *ngIf="item.items" class="ml-6 flex flex-column gap-1">
-        <a 
+        <a
           *ngFor="let subItem of item.items"
           [routerLink]="subItem.routerLink || '#'"
           class="flex align-items-center p-2 text-sm text-color-secondary hover:surface-50 border-round transition-colors"
-          (click)="sidebarVisible = false">
+          (click)="sidebarVisible = false"
+        >
           <i [class]="subItem.icon" class="mr-3"></i>
           {{ subItem.label }}
         </a>

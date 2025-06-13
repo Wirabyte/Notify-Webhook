@@ -15,7 +15,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     MenubarModule,
     ButtonModule,
     SidebarModule,
-    ToolbarModule
+    ToolbarModule,
   ],
   exports: [
     CommonModule,
@@ -23,7 +23,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     MenubarModule,
     ButtonModule,
     SidebarModule,
-    ToolbarModule
-  ]
+    ToolbarModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

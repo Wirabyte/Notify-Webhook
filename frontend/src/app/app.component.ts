@@ -8,7 +8,7 @@ import { LayoutModule } from './layout/layout.module';
   selector: 'app-root',
   imports: [RouterOutlet, CommonModule, ButtonModule, LayoutModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'Webhook Notification Manager';

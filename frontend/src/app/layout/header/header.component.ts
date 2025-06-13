@@ -5,7 +5,7 @@ import { MenuItem } from 'primeng/api';
   selector: 'app-header',
   standalone: false,
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
   items: MenuItem[] = [];
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Home',
         icon: 'pi pi-home',
-        routerLink: '/'
+        routerLink: '/',
       },
       {
         label: 'Webhooks',
@@ -24,13 +24,13 @@ export class HeaderComponent implements OnInit {
         items: [
           {
             label: 'Create Webhook',
-            icon: 'pi pi-plus'
+            icon: 'pi pi-plus',
           },
           {
             label: 'Manage Webhooks',
-            icon: 'pi pi-cog'
-          }
-        ]
+            icon: 'pi pi-cog',
+          },
+        ],
       },
       {
         label: 'Platforms',
@@ -38,18 +38,18 @@ export class HeaderComponent implements OnInit {
         items: [
           {
             label: 'Discord',
-            icon: 'pi pi-discord'
+            icon: 'pi pi-discord',
           },
           {
             label: 'LINE',
-            icon: 'pi pi-comment'
+            icon: 'pi pi-comment',
           },
           {
             label: 'Telegram',
-            icon: 'pi pi-send'
-          }
-        ]
-      }
+            icon: 'pi pi-send',
+          },
+        ],
+      },
     ];
   }
 }
