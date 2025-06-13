@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: notify-webhook-backend-dev
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DB_TYPE=sqlite
+      - DB_DATABASE=/app/data/database.sqlite
+      - DB_SYNCHRONIZE=true
+      - DB_LOGGING=true
+      - API_DOCS_ENABLED=true
+      - API_DOCS_PATH=api
+      - CORS_ORIGINS=http://localhost:4200,http://localhost:80,http://frontend
+      - CORS_CREDENTIALS=true
+      - APP_NAME=Webhook Notification API (Development)
+      - APP_VERSION=1.0.0-dev
+      - APP_DESCRIPTION=API for managing webhooks and notifications to multiple platforms
+      - CONTACT_NAME=API Support
+      - CONTACT_URL=https://github.com/Wirabyte/Notify-Webhook
+      - CONTACT_EMAIL=support@example.com
+    volumes:
+      - backend_data:/app/data
+    networks:
+      - notify-webhook-network
+    healthcheck:
+      test: ["CMD", "npm", "run", "start:prod", "--", "--healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: notify-webhook-frontend-dev
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - notify-webhook-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  notify-webhook-network:
+    driver: bridge
+
+volumes:
+  backend_data:
+    driver: local

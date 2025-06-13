@@ -1,0 +1,50 @@
+# Git files
+.git/
+.gitignore
+
+# Node modules
+node_modules
+**/node_modules
+
+# Build outputs
+**/dist/
+backend/dist/
+frontend/dist/
+
+# Environment files
+.env
+.env.local
+**/.env.local
+
+# Logs
+**/*.log
+logs/
+
+# Database files
+**/*.sqlite
+**/*.db
+
+# IDE files
+.vscode/
+.idea/
+**/.vscode/
+**/.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+**/.DS_Store
+**/Thumbs.db
+
+# Documentation
+docs/
+README.md
+
+# Test files
+**/test/
+**/coverage/
+**/*.spec.ts
+
+# Package lock files (let Docker handle dependency installation)
+package-lock.json
+**/package-lock.json

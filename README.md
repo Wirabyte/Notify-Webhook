@@ -91,11 +91,32 @@ The frontend will be available at `http://localhost:4200`.
 npm run build
 ```
 
+## Deployment
+
+### Docker Deployment (Recommended)
+
+The easiest way to deploy this application is using Docker:
+
+```bash
+# Production deployment
+docker-compose up -d
+
+# Development deployment (with API docs)
+docker-compose -f docker-compose.dev.yml up -d
+```
+
+See the [Docker Deployment Guide](docs/docker-deployment.md) for detailed instructions.
+
+### Manual Deployment
+
+For manual deployment without Docker, see the individual README files in the backend and frontend directories.
+
 ## Development
 
 ### Prerequisites
 - Node.js 18+ 
 - npm
+- Docker (optional, for containerized development)
 
 ### Code Quality
 

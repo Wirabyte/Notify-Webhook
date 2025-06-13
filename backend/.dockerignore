@@ -1,0 +1,40 @@
+# Node modules
+node_modules
+npm-debug.log*
+
+# TypeScript build outputs
+dist/
+
+# Environment files (exclude production)
+.env
+.env.local
+.env.development
+.env.staging
+
+# Database files
+*.sqlite
+*.db
+
+# Logs
+logs
+*.log
+
+# Test files
+test/
+coverage/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git files
+.git/
+.gitignore
+
+# Documentation
+README.md
+docs/
