@@ -31,7 +31,7 @@ module.exports = tseslint.config(
           style: "kebab-case",
         },
       ],
-      "@angular-eslint/prefer-standalone": "warn",
+      "@angular-eslint/prefer-standalone": "off",
       // Disable rules that conflict with Prettier
       ...eslintConfigPrettier.rules,
     },

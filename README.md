@@ -155,7 +155,7 @@ Follow this workflow for every code change:
 
 #### Configuration
 - **Backend**: ESLint with TypeScript rules, Prettier for formatting
-- **Frontend**: ESLint with Angular-specific rules, Prettier for formatting (standalone components)
+- **Frontend**: ESLint with Angular-specific rules, Prettier for formatting
 - **Shared Config**: Consistent Prettier settings across both projects
   - Single quotes, trailing commas, 120 character line width
   - Tab width: 2 spaces, semicolons enabled
