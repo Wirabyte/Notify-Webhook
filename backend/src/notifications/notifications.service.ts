@@ -1,6 +1,6 @@
 import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { WebhooksService } from '../webhooks/webhooks.service';
-import { SendNotificationDto, NotificationResponseDto } from './dto/notification.dto';
+import { SendNotificationDto, NotificationResponseDto, PlatformResult } from './dto/notification.dto';
 import { NotificationPlatform } from '../webhooks/dto/webhook.dto';
 
 interface PlatformData {
@@ -8,13 +8,6 @@ interface PlatformData {
   title?: string;
   metadata?: Record<string, unknown>;
   config?: Record<string, unknown>;
-}
-
-interface PlatformResult {
-  success: boolean;
-  platform?: string;
-  timestamp?: Date;
-  error?: string;
 }
 
 @Injectable()
@@ -26,7 +19,7 @@ export class NotificationsService {
 
   async sendNotification(sendNotificationDto: SendNotificationDto): Promise<NotificationResponseDto> {
     const { webhookId, message, title, platforms } = sendNotificationDto;
-    const metadata = sendNotificationDto.metadata as Record<string, unknown> | undefined;
+    const metadata = sendNotificationDto.metadata;
 
     try {
       const webhook = await this.webhooksService.findOne(webhookId);

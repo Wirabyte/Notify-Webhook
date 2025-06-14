@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { NotificationsService } from './notifications.service';
 import { WebhooksService } from '../webhooks/webhooks.service';
-import { SendNotificationDto } from './dto/notification.dto';
+import { SendNotificationDto, PlatformResult } from './dto/notification.dto';
 import { NotificationPlatform } from '../webhooks/dto/webhook.dto';
 import { Webhook } from '../webhooks/entities/webhook.entity';
 
@@ -63,10 +63,11 @@ describe('NotificationsService', () => {
       expect(result.success).toBe(true);
       expect(result.message).toBe('Notification sent successfully');
       expect(result.platformResults).toBeDefined();
-      expect(result.platformResults![NotificationPlatform.DISCORD]).toEqual({
+      const discordResult = result.platformResults![NotificationPlatform.DISCORD] as PlatformResult;
+      expect(discordResult).toEqual({
         success: true,
         platform: 'discord',
-        timestamp: expect.any(Date),
+        timestamp: expect.any(Date) as Date,
       });
     });
 
@@ -141,7 +142,8 @@ describe('NotificationsService', () => {
       const result = await service.sendNotification(sendNotificationDto);
 
       expect(result.success).toBe(true);
-      expect(result.platformResults![NotificationPlatform.DISCORD].success).toBe(true);
+      const discordResult = result.platformResults![NotificationPlatform.DISCORD] as PlatformResult;
+      expect(discordResult.success).toBe(true);
 
       consoleSpy.mockRestore();
     });
