@@ -1,6 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { NotificationPlatform } from '../../webhooks/dto/webhook.dto';
 
+export interface PlatformResult {
+  success: boolean;
+  platform?: string;
+  timestamp?: Date;
+  error?: string;
+}
+
 export class SendNotificationDto {
   @ApiProperty({
     description: 'Webhook ID to send notification from',
@@ -39,7 +46,7 @@ export class SendNotificationDto {
       timestamp: '2025-01-01T00:00:00Z',
     },
   })
-  metadata?: any;
+  metadata?: Record<string, unknown>;
 }
 
 export class NotificationResponseDto {
@@ -66,5 +73,5 @@ export class NotificationResponseDto {
       },
     },
   })
-  platformResults?: { [key in NotificationPlatform]?: any };
+  platformResults?: { [key in NotificationPlatform]?: PlatformResult };
 }
